@@ -1,33 +1,17 @@
-# WireGuard sensitive keys
-/etc/wireguard/*.key
-/etc/wireguard/*.conf
+#!/bin/bash
+# Backup Nextcloud data and database
+DATA_DIR="/var/www/nextcloud/data"
+DB_NAME="nextcloud"
+DB_USER="nextclouduser"
+DB_PASS="yourpassword"
+BACKUP_DIR="/root/backups/nextcloud-$(date +%F)"
 
-# Nextcloud sensitive config
-/var/www/nextcloud/config/config.php
+mkdir -p $BACKUP_DIR
 
-# Backup and database files
-/var/backups/
-/var/lib/mysql/
-/var/lib/mariadb/
-/var/lib/postgresql/
+# Backup data
+rsync -a $DATA_DIR $BACKUP_DIR/data
 
-# Temporary files
-*.swp
-*.tmp
-*.log
-*.cache
+# Backup database
+mysqldump -u $DB_USER -p$DB_PASS $DB_NAME > $BACKUP_DIR/db.sql
 
-# OS specific files
-.DS_Store
-Thumbs.db
-
-# IDE/editor specific files
-.vscode/
-.idea/
-*.sublime-workspace
-*.sublime-project
-
-# Virtual machine disks
-*.qcow2
-*.vmdk
-*.img
+echo "Nextcloud backup completed at $BACKUP_DIR"
