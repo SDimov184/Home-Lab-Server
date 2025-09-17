@@ -1,0 +1,33 @@
+# WireGuard sensitive keys
+/etc/wireguard/*.key
+/etc/wireguard/*.conf
+
+# Nextcloud sensitive config
+/var/www/nextcloud/config/config.php
+
+# Backup and database files
+/var/backups/
+/var/lib/mysql/
+/var/lib/mariadb/
+/var/lib/postgresql/
+
+# Temporary files
+*.swp
+*.tmp
+*.log
+*.cache
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# IDE/editor specific files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Virtual machine disks
+*.qcow2
+*.vmdk
+*.img
